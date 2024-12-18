@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import { Toaster } from "react-hot-toast";
-import { Protected, Public, Admin } from "./middleware/route";
+import { Protected, Public } from "./middleware/route";
 import React, { lazy, Suspense } from "react";
 import Loading from "./components/Loading";
 
@@ -71,38 +71,6 @@ function App() {
             element={
               <Protected>
                 <Profile />
-              </Protected>
-            }
-          />
-          <Route
-            path="/dashboard/users"
-            element={
-              <Admin>
-                <Dashboard type={"users"} />
-              </Admin>
-            }
-          />
-          <Route
-            path="/dashboard/doctors"
-            element={
-              <Admin>
-                <Dashboard type={"doctors"} />
-              </Admin>
-            }
-          />
-          <Route
-            path="/dashboard/appointments"
-            element={
-              <Protected>
-                <Dashboard type={"appointments"} />
-              </Protected>
-            }
-          />
-          <Route
-            path="/dashboard/applications"
-            element={
-              <Protected>
-                <Dashboard type={"applications"} />
               </Protected>
             }
           />

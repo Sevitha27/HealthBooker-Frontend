@@ -38,11 +38,6 @@ const Navbar = () => {
           <li>
             <NavLink to={"/doctors"}>Doctors</NavLink>
           </li>
-          {token && user.isAdmin && (
-            <li>
-              <NavLink to={"/dashboard/users"}>Dashboard</NavLink>
-            </li>
-          )}
           {token && !user.isAdmin && (
             <>
               <li>

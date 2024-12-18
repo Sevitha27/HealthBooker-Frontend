@@ -26,17 +26,3 @@ export const Public = ({ children }) => {
     ></Navigate>
   );
 };
-
-export const Admin = ({ children }) => {
-  const user = jwtDecode(localStorage.getItem("token"));
-
-  if (user.isAdmin) {
-    return children;
-  }
-  return (
-    <Navigate
-      to={"/"}
-      replace={true}
-    ></Navigate>
-  );
-};
