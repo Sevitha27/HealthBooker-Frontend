@@ -1,12 +1,16 @@
 import React, { useState } from "react";
 import "../styles/contact.css";
+import axios from "axios";
 
 const Contact = () => {
-  const [formDetails, setFormDetails] = useState({
+
+  const initialState = {
     name: "",
     email: "",
-    message: "",
-  });
+    message: ""
+  }
+
+  const [formDetails, setFormDetails] = useState(initialState);
 
   const inputChange = (e) => {
     const { name, value } = e.target;
@@ -16,6 +20,23 @@ const Contact = () => {
     });
   };
 
+  const sendMail = async(event) => {
+    event.preventDefault()
+    try{
+      console.log(formDetails)
+      const response = await axios.post(`${process.env.REACT_APP_MAILING_DOMAIN}/mail`, formDetails)
+      console.log(response)
+      if(response.status != 200){
+        console.log("Failed")
+      }
+      else{
+        setFormDetails(initialState)
+      }
+    }catch(err){
+      console.log("Cannot Connect to Server")
+    }
+  }
+
   return (
     <section
       className="register-section flex-center"
@@ -23,11 +44,7 @@ const Contact = () => {
     >
       <div className="contact-container flex-center contact">
         <h2 className="form-heading">Contact Us</h2>
-        <form
-          method="POST"
-          action={`https://formspree.io/f/${process.env.REACT_APP_FORMIK_SECRET}`}
-          className="register-form"
-        >
+        <form className="register-form" onSubmit={sendMail}>
           <input
             type="text"
             name="name"
