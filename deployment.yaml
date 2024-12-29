@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-deploy
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: cloud-frontend
+  template:
+    metadata:
+      labels:
+        app: cloud-frontend
+    spec:
+      containers:
+        - name: cloud-frontend
+          image: registry.digitalocean.com/cloud-aat/frontend:1.0.0
+          ports:
+          - containerPort: 3000
